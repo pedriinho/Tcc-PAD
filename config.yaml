@@ -1,0 +1,26 @@
+# Configuração do TCC 
+
+# Caminhos
+dataset_dir: "C:/Users/pedro/Documents/TCC-Ult/oulu-npu"   # TROQUE pelo caminho da pasta com Train_files, Dev_files, Test_files e Protocols
+resultados_dir: "resultados"          # relativo à pasta do projeto
+preditor_landmarks: "modelos/shape_predictor_68_face_landmarks.dat"   # relativo à pasta do projeto
+preproc_dir: "C:/Users/pedro/Documents/TCC-Ult/preproc"   # recortes e landmarks
+
+# Recorte da face (Ramo A)
+tamanho_recorte: 224        # o recorte final da face é 224x224 px
+margem_face: 1.4            # o quadrado da face é aumentado 1.4x antes do recorte
+lado_maior_deteccao: 640    # o quadro é reduzido para o lado maior ter 640 px antes da detecção
+
+# Pré-processamento (etapa 5)
+passo_quadros: 3            # usa o recorte de 1 a cada 3 quadros no treino e na avaliação (landmarks: sempre todos)
+qualidade_jpg: 95           # qualidade dos JPG dos recortes (0-100)
+
+# Ramo B - olhos (etapa 8)
+fator_olho_fechado: 0.75     # olho fechado se EAR < 0.75 x mediana do EAR dos quadros já vistos
+max_quadros_piscada: 12      # piscada = 1 a 12 quadros fechados entre quadros abertos (~400 ms a 30 fps)
+tamanho_janela: 5            # quadros por janela (5 ou 10)
+
+# Estratégia guiada 
+# orçamento = fração máxima de vídeos que consultam o Ramo B; medido no Raspberry Pi 5 (etapa 13):
+# 3,07 s (Ramo A) + f x 4,30 s (consulta ao B) <= 5,03 s (observação) -> f <= 45,6%
+orcamento_consulta: 0.45

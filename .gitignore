@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+resultados/
+resultados_taxa_fixa/
+modelos/
+pi/amostras/
+pi/videos/
